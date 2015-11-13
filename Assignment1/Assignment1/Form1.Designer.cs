@@ -142,6 +142,9 @@
             // 
             // trianglePanel
             // 
+            this.trianglePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.trianglePanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.trianglePanel.Location = new System.Drawing.Point(22, 40);
             this.trianglePanel.Name = "trianglePanel";
@@ -151,6 +154,7 @@
             // 
             // startTriangleButton
             // 
+            this.startTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.startTriangleButton.Location = new System.Drawing.Point(22, 522);
             this.startTriangleButton.Name = "startTriangleButton";
             this.startTriangleButton.Size = new System.Drawing.Size(304, 49);
@@ -161,6 +165,7 @@
             // 
             // stopTriangleButton
             // 
+            this.stopTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.stopTriangleButton.Location = new System.Drawing.Point(344, 522);
             this.stopTriangleButton.Name = "stopTriangleButton";
             this.stopTriangleButton.Size = new System.Drawing.Size(174, 49);
@@ -171,6 +176,9 @@
             // 
             // displayPanel
             // 
+            this.displayPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.displayPanel.BackColor = System.Drawing.SystemColors.ControlLight;
             this.displayPanel.Location = new System.Drawing.Point(19, 32);
             this.displayPanel.Name = "displayPanel";
@@ -180,6 +188,7 @@
             // 
             // stopDisplayButton
             // 
+            this.stopDisplayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.stopDisplayButton.Location = new System.Drawing.Point(315, 514);
             this.stopDisplayButton.Name = "stopDisplayButton";
             this.stopDisplayButton.Size = new System.Drawing.Size(174, 49);
@@ -190,6 +199,8 @@
             // 
             // startDisplayButton
             // 
+            this.startDisplayButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.startDisplayButton.Location = new System.Drawing.Point(19, 514);
             this.startDisplayButton.Name = "startDisplayButton";
             this.startDisplayButton.Size = new System.Drawing.Size(274, 49);
@@ -215,6 +226,7 @@
             this.Text = "Multiple Thread Demo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.musicBox.ResumeLayout(false);
             this.musicBox.PerformLayout();
             this.displayBox.ResumeLayout(false);

@@ -58,7 +58,7 @@ namespace Assignment1
 
         private void startDisplayButton_Click(object sender, EventArgs e)
         {
-            if (runDisplay)
+            if (runDisplay || (displayThread != null && displayThread.IsAlive))
                 return;
 
             runDisplay = true;
@@ -92,7 +92,7 @@ namespace Assignment1
 
         private void startTriangleButton_Click(object sender, EventArgs e)
         {
-            if (runTriangle)
+            if (runTriangle || (triangleThread != null && triangleThread.IsAlive))
                 return;
 
             runTriangle = true;
@@ -140,6 +140,9 @@ namespace Assignment1
             }
         }
 
-      
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            Refresh();
+        }
     }
 }

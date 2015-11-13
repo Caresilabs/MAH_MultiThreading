@@ -30,7 +30,7 @@ namespace Assignment1
            
 
             //m.Rotate(angle);
-            angle += 5;
+            angle += 10;
             // m.Rotate(angle);
 
             //  m.Translate(g.VisibleClipBounds.Width / 2f, g.VisibleClipBounds.Height / 2f);
