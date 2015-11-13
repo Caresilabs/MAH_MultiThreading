@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment1
 {
     public class Triangle
     {
         private PointF[] vertices;
-        Matrix m = new Matrix();
-        float angle;
+        private float angle;
 
         public Triangle(int size)
         {
@@ -25,19 +19,13 @@ namespace Assignment1
         public void Draw(Graphics g)
         {
             g.ResetTransform();
-            m.Reset();
 
-           
-
-            //m.Rotate(angle);
-            angle += 10;
-            // m.Rotate(angle);
-
-            //  m.Translate(g.VisibleClipBounds.Width / 2f, g.VisibleClipBounds.Height / 2f);
-
-
+            g.ScaleTransform(1 + (float)Math.Cos(angle/200f)/1f, 1+ (float)Math.Cos(angle/200f)/1f);
             g.TranslateTransform(g.VisibleClipBounds.Width / 2f, g.VisibleClipBounds.Height / 2f);
+
+            angle += 10;
             g.RotateTransform(angle);
+
             g.DrawPolygon(new Pen(new SolidBrush(Color.Black), 3), vertices);
         }
     }
