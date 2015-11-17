@@ -101,7 +101,7 @@ namespace Assignment1
               
                 while (runTriangle)
                 {
-                    Thread.Sleep(10);
+                    Thread.Sleep(16);   //60fps
                     DrawTriangle(graphics);
                 }
 
