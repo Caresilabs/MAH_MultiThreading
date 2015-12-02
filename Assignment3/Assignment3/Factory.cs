@@ -29,11 +29,14 @@ namespace Assignment3
 
             while (IsRunning)
             {
-                StatusLabel.InvokeMain(() => { StatusLabel.Text = "Working..."; });
+                StatusLabel.InvokeMain(() => { StatusLabel.Text = "Producing..."; });
                 Thread.Sleep(800);
 
                 StatusLabel.InvokeMain(() => { StatusLabel.Text = "Delivering..."; });
-                Storage.DeliverItem(FoodBuffer[rnd.Next(0, FoodBuffer.Length)]);
+                while (!Storage.DeliverItem(FoodBuffer[rnd.Next(0, FoodBuffer.Length)]) && IsRunning) {
+                    StatusLabel.InvokeMain(() => { StatusLabel.Text = "Full waiting..."; });
+                    Thread.Sleep(1000);
+                }
                 Thread.Sleep(300);
             }
         }

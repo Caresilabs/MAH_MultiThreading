@@ -44,18 +44,18 @@ namespace Assignment3
             {
                 StatusLabel.InvokeMain(() => { StatusLabel.Text = "Loading..."; });
 
-                while (!IsFull())
+                while (!IsFull() && IsRunning)
                 {
                     FoodItem item;
                     if (Storage.FetchItem(out item))
                     {
                         TruckStorage.Add(item);
                     }
-                    Thread.Sleep(300);
+                    Thread.Sleep(250);
                 }
 
                 StatusLabel.InvokeMain(() => { StatusLabel.Text = "Delivering..."; });
-                Thread.Sleep(1000);
+                Thread.Sleep(800);
                 foreach (var foodItem in TruckStorage)
                 {
                     DeliverList.InvokeMain(() => { DeliverList.Items.Add(foodItem); });

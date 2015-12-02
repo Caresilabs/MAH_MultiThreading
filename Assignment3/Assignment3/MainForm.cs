@@ -14,7 +14,7 @@ namespace Assignment3
         public MainForm()
         {
             InitializeComponent();
-            this.Storage = new Storage(StorageProgress);
+            this.Storage = new Storage(StorageProgress, StorageProgressLabel);
 
             this.FactoryA = new Factory(Storage, FactoryAStatus);
             this.FactoryB = new Factory(Storage, FactoryBStatus);

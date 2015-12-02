@@ -55,6 +55,7 @@
             this.StopDeliver = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.TruckStatusLabel = new System.Windows.Forms.Label();
+            this.StorageProgressLabel = new System.Windows.Forms.Label();
             this.FactoryGroupBoxB.SuspendLayout();
             this.FactoryGroupBox.SuspendLayout();
             this.ICADeliveryBox.SuspendLayout();
@@ -167,6 +168,7 @@
             // 
             // StorageGroupBox
             // 
+            this.StorageGroupBox.Controls.Add(this.StorageProgressLabel);
             this.StorageGroupBox.Controls.Add(this.StorageProgress);
             this.StorageGroupBox.Location = new System.Drawing.Point(32, 12);
             this.StorageGroupBox.Name = "StorageGroupBox";
@@ -335,6 +337,15 @@
             this.TruckStatusLabel.TabIndex = 7;
             this.TruckStatusLabel.Text = "Waiting...";
             // 
+            // StorageProgressLabel
+            // 
+            this.StorageProgressLabel.AutoSize = true;
+            this.StorageProgressLabel.Location = new System.Drawing.Point(686, 126);
+            this.StorageProgressLabel.Name = "StorageProgressLabel";
+            this.StorageProgressLabel.Size = new System.Drawing.Size(42, 25);
+            this.StorageProgressLabel.TabIndex = 1;
+            this.StorageProgressLabel.Text = "1/1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -346,7 +357,7 @@
             this.Controls.Add(this.StorageGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "ICA Delivery System";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.FactoryGroupBoxB.ResumeLayout(false);
             this.FactoryGroupBoxB.PerformLayout();
@@ -355,6 +366,7 @@
             this.ICADeliveryBox.ResumeLayout(false);
             this.ICADeliveryBox.PerformLayout();
             this.StorageGroupBox.ResumeLayout(false);
+            this.StorageGroupBox.PerformLayout();
             this.TruckLimitBox.ResumeLayout(false);
             this.TruckLimitBox.PerformLayout();
             this.ResumeLayout(false);
@@ -390,5 +402,6 @@
         private System.Windows.Forms.Button StopDeliver;
         private System.Windows.Forms.Label TruckStatusLabel;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label StorageProgressLabel;
     }
 }

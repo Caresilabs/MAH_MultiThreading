@@ -14,12 +14,15 @@ namespace Assignment3
 
         public ProgressBar ProgressBar { get; private set; }
 
-        public Storage(ProgressBar progressBar)
+        public Label CountLabel { get; private set; }
+
+        public Storage(ProgressBar progressBar, Label countLabel)
         {
             this.ProgressBar = progressBar;
+            this.CountLabel = countLabel;
             this.StorageLock = new Semaphore(1, 1);
             this.StorageBuffer = new Queue<FoodItem>();
-            this.MaxItems = 100;
+            this.MaxItems = 50;
         }
 
         public bool DeliverItem(FoodItem item)
@@ -30,8 +33,9 @@ namespace Assignment3
             }
 
             StorageLock.WaitOne();
-            ProgressBar.InvokeMain(() => { ProgressBar.Value += 1; });
+            ProgressBar.InvokeMain(() => { ProgressBar.Value += (int)((1f / MaxItems) * 100); });
             StorageBuffer.Enqueue(item);
+            CountLabel.InvokeMain(() => { CountLabel.Text = (StorageBuffer.Count + "/" + MaxItems); });
             StorageLock.Release();
             return true;
         }
@@ -45,8 +49,9 @@ namespace Assignment3
             }
 
             StorageLock.WaitOne();
-            ProgressBar.InvokeMain(() => { ProgressBar.Value -= 1; });
+            ProgressBar.InvokeMain(() => { ProgressBar.Value -= (int)((1f / MaxItems) * 100); });
             item = StorageBuffer.Dequeue();
+            CountLabel.InvokeMain(() => { CountLabel.Text = (StorageBuffer.Count + "/" + MaxItems); });
             StorageLock.Release();
             return true;
         }
