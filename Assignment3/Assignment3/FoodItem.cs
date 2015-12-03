@@ -1,6 +1,9 @@
 ﻿
 namespace Assignment3
 {
+    /// <summary>
+    /// A database model for our products.
+    /// </summary>
     public class FoodItem
     {
         public string Name { get; private set; }

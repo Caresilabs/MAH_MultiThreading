@@ -7,19 +7,26 @@ namespace Assignment3
     public partial class MainForm : Form
     {
         public Truck Truck { get; private set; }
+
         public Storage Storage { get; private set; }
+
         public Factory FactoryA { get; private set; }
+
         public Factory FactoryB { get; private set; }
 
         public MainForm()
         {
             InitializeComponent();
-            this.Storage = new Storage(StorageProgress, StorageProgressLabel);
 
+            // Create our storage
+            this.Storage = new Storage(StorageProgress, StorageProgressLabel);
+            
+            // Create 2 brand new Factories
             this.FactoryA = new Factory(Storage, FactoryAStatus);
             this.FactoryB = new Factory(Storage, FactoryBStatus);
 
-            this.Truck = new Truck(Storage, DeliverList, TruckStatusLabel, 12, 27, 15);
+            // Create a new truck
+            this.Truck = new Truck(Storage, DeliverList, TruckStatusLabel, TruckLimitItems, TruckLimitWeight, TruckLimitVolume ,12, 27, 15);
             TruckLimitVolume.Text = "12";
             TruckLimitWeight.Text = "27";
             TruckLimitItems.Text = "15";
@@ -30,6 +37,7 @@ namespace Assignment3
         {
             if (FactoryA.Start())
             {
+                // Switch start/stop button state
                 StopFactoryA.Enabled = true;
                 StartFactoryA.Enabled = false;
             }
@@ -39,6 +47,7 @@ namespace Assignment3
         {
             if (FactoryA.Stop())
             {
+                // Switch start/stop button state
                 StopFactoryA.Enabled = false;
                 StartFactoryA.Enabled = true;
             }
@@ -48,6 +57,7 @@ namespace Assignment3
         {
             if (FactoryB.Start())
             {
+                // Switch start/stop button state
                 StopFactoryB.Enabled = true;
                 StartFactoryB.Enabled = false;
             }
@@ -57,6 +67,7 @@ namespace Assignment3
         {
             if (FactoryB.Stop())
             {
+                // Switch start/stop button state
                 StopFactoryB.Enabled = false;
                 StartFactoryB.Enabled = true;
             }
@@ -66,6 +77,7 @@ namespace Assignment3
         {
             if (Truck.Start())
             {
+                // Switch start/stop button state
                 StartDeliver.Enabled = false;
                 StopDeliver.Enabled = true;
             }
@@ -75,6 +87,7 @@ namespace Assignment3
         {
             if (Truck.Stop())
             {
+                // Switch start/stop button state
                 StartDeliver.Enabled = true;
                 StopDeliver.Enabled = false;
             }
