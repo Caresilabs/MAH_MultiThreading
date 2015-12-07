@@ -4,11 +4,11 @@ namespace Assignment4
 {
     public class Writer : RunnableLoop
     {
-        public ICollection<string> TextToWrite { get; private set; }
+        public List<string> TextToWrite { get; private set; }
 
         public BoundedBuffer Buffer { get; private set; }
 
-        public Writer(BoundedBuffer buffer, ICollection<string> textToWrite)
+        public Writer(BoundedBuffer buffer, List<string> textToWrite)
         {
             this.TextToWrite = textToWrite;
             this.Buffer = buffer;
@@ -17,7 +17,14 @@ namespace Assignment4
 
         public void WriteLoop()
         {
-
+            while (TextToWrite.Count > 0 && IsRunning)
+            {
+                string data = TextToWrite[0];
+                if (Buffer.WriteData(data))
+                {
+                    TextToWrite.RemoveAt(0);
+                }
+            }
         }
     }
 }

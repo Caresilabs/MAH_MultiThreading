@@ -8,7 +8,7 @@ namespace Assignment4
 
         public int Count { get; private set; }
 
-        public Modifier(BoundedBuffer buffer, int textLength) 
+        public Modifier(BoundedBuffer buffer, int textLength)
         {
             this.Buffer = buffer;
             this.Count = textLength;
@@ -17,16 +17,9 @@ namespace Assignment4
 
         public void ModifierLoop()
         {
-            for (int i = 0; i < Count; i++)
+            for (int i = 0; i < Count && IsRunning; i++)
             {
-                try
-                {
-                    Buffer.Modify();
-                }
-                catch (Exception e)
-                {
-
-                }
+                while (!Buffer.Modify()) ;
             }
         }
     }

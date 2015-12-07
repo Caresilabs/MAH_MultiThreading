@@ -20,7 +20,8 @@ namespace Assignment4
                 return;
 
             IsRunning = true;
-            Thread = new Thread(Start);
+            Thread = new Thread(LoopMethod);
+            Thread.Start();
         }
 
         public void Stop()
