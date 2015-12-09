@@ -38,10 +38,10 @@ namespace Assignment1
 
         private void openMusicButton_Click(object sender, EventArgs e)
         {
-
             if (openMusicDialog.ShowDialog() == DialogResult.OK)
             {
                 musicFilePathLabel.Text = openMusicDialog.FileName;
+                startMusicButton.Enabled = true;
             }
         }
 
@@ -49,11 +49,17 @@ namespace Assignment1
         {
             musicPlayer.open(openMusicDialog.FileName);
             musicPlayer.play();
+
+            startMusicButton.Enabled = false;
+            stopMusicButton.Enabled = true;
         }
 
         private void stopMusicButton_Click(object sender, EventArgs e)
         {
             musicPlayer.stop();
+
+            startMusicButton.Enabled = true;
+            stopMusicButton.Enabled = false;
         }
 
         private void startDisplayButton_Click(object sender, EventArgs e)
@@ -72,6 +78,9 @@ namespace Assignment1
                 }
 
             })).Start();
+
+            stopDisplayButton.Enabled = true;
+            startDisplayButton.Enabled = false;
         }
 
         private void displayPanel_Paint(object sender, PaintEventArgs e)
@@ -88,6 +97,9 @@ namespace Assignment1
         private void stopDisplayButton_Click(object sender, EventArgs e)
         {
             runDisplay = false;
+
+            stopDisplayButton.Enabled = false;
+            startDisplayButton.Enabled = true;
         }
 
         private void startTriangleButton_Click(object sender, EventArgs e)
@@ -106,6 +118,9 @@ namespace Assignment1
                 }
 
             })).Start();
+
+            stopTriangleButton.Enabled = true;
+            startTriangleButton.Enabled = false;
         }
 
 
@@ -123,6 +138,9 @@ namespace Assignment1
         private void stopTriangleButton_Click(object sender, EventArgs e)
         {
             runTriangle = false;
+
+            stopTriangleButton.Enabled = false;
+            startTriangleButton.Enabled = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)

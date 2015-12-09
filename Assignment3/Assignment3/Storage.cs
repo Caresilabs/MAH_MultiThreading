@@ -9,7 +9,9 @@ namespace Assignment3
     /// </summary>
     public class Storage
     {
-        private Semaphore StorageLock { get; set; }
+        private Semaphore FullSemaphore { get; set; }
+
+        private Semaphore EmptySemaphore { get; set; }
 
         private Mutex StorageMutex { get; set; }
 
@@ -26,7 +28,8 @@ namespace Assignment3
             this.MaxItems = 50;
             this.ProgressBar = progressBar;
             this.CountLabel = countLabel;
-            this.StorageLock = new Semaphore(2, 2);
+            this.FullSemaphore = new Semaphore(0, MaxItems);
+            this.EmptySemaphore = new Semaphore(MaxItems, MaxItems);
             this.StorageMutex = new Mutex();
             this.StorageBuffer = new Queue<FoodItem>(MaxItems);
         }
@@ -43,13 +46,16 @@ namespace Assignment3
                 return false;
             }
 
-            StorageLock.WaitOne();
+            EmptySemaphore.WaitOne();
+
             StorageMutex.WaitOne();
             ProgressBar.InvokeMain(() => { ProgressBar.Value += (int)((1f / MaxItems) * 100); });
             StorageBuffer.Enqueue(item);
             CountLabel.InvokeMain(() => { CountLabel.Text = (StorageBuffer.Count + "/" + MaxItems); });
             StorageMutex.ReleaseMutex();
-            StorageLock.Release();
+
+            FullSemaphore.Release();
+
             return true;
         }
 
@@ -66,13 +72,16 @@ namespace Assignment3
                 return false;
             }
 
-            StorageLock.WaitOne();
+            FullSemaphore.WaitOne();
+
             StorageMutex.WaitOne();
             ProgressBar.InvokeMain(() => { ProgressBar.Value -= (int)((1f / MaxItems) * 100); });
             item = StorageBuffer.Dequeue();
             CountLabel.InvokeMain(() => { CountLabel.Text = (StorageBuffer.Count + "/" + MaxItems); });
             StorageMutex.ReleaseMutex();
-            StorageLock.Release();
+
+            EmptySemaphore.Release();
+
             return true;
         }
     }

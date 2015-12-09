@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Assignment4
@@ -53,21 +54,22 @@ namespace Assignment4
             if (!string.IsNullOrEmpty(findString))
             {
                 int index = 0;
-                while ((index = stringBuffer[findPosition].IndexOf(findString, index)) != -1)
+                string currentLine = stringBuffer[findPosition];
+                while ((index = replaced.IndexOf(findString, Math.Min(index, currentLine.Length))) != -1)
                 {
-                    int startIndex = 0;
-                    txtBox.BeginInvoke(new MethodInvoker(() =>
-                    {
-                        startIndex = txtBox.GetFirstCharIndexFromLine(linesModified) + index;
-                    }), null);
+                   // int startIndex = 0;
+                    //txtBox.BeginInvoke(new MethodInvoker(() =>
+                    //{
+                    //    startIndex = txtBox.GetFirstCharIndexFromLine(linesModified) + index;
+                    //}), null);
 
 
-                    txtBox.BeginInvoke(new MethodInvoker(() =>
-                    {
-                        txtBox.Select(startIndex, findString.Length);
-                        txtBox.SelectionColor = Color.White;
-                        txtBox.SelectionBackColor = Color.Blue;
-                    }), null);
+                    //txtBox.BeginInvoke(new MethodInvoker(() =>
+                    //{
+                    //    txtBox.Select(startIndex, findString.Length);
+                    //    txtBox.SelectionColor = Color.White;
+                    //    txtBox.SelectionBackColor = Color.Blue;
+                    //}), null);
 
                     bool shouldReplace = (notify ? (MessageBox.Show("Replace " + findString + " with " + replaceString + "?", "Replace", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button1) == DialogResult.Yes) : true);
@@ -78,14 +80,14 @@ namespace Assignment4
                         NumOfReplacements++;
                     }
 
-                    txtBox.BeginInvoke(new MethodInvoker(() =>
-                    {
-                        txtBox.Select(startIndex, findString.Length);
-                        txtBox.SelectionColor = Color.Black;
-                        txtBox.SelectionBackColor = Color.Green;
-                    }), null);
+                    //txtBox.BeginInvoke(new MethodInvoker(() =>
+                    //{
+                    //    txtBox.Select(startIndex, findString.Length);
+                    //    txtBox.SelectionColor = Color.Black;
+                    //    txtBox.SelectionBackColor = Color.Green;
+                    //}), null);
 
-                    index += replaceString.Length;
+                    index += replaceString.Length ;
                 }
             }
 

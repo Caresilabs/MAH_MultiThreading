@@ -29,19 +29,19 @@
         private void InitializeComponent()
         {
             this.musicBox = new System.Windows.Forms.GroupBox();
-            this.displayBox = new System.Windows.Forms.GroupBox();
-            this.triangleBox = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.openMusicButton = new System.Windows.Forms.Button();
-            this.startMusicButton = new System.Windows.Forms.Button();
-            this.stopMusicButton = new System.Windows.Forms.Button();
             this.musicFilePathLabel = new System.Windows.Forms.Label();
-            this.trianglePanel = new System.Windows.Forms.Panel();
-            this.startTriangleButton = new System.Windows.Forms.Button();
-            this.stopTriangleButton = new System.Windows.Forms.Button();
+            this.stopMusicButton = new System.Windows.Forms.Button();
+            this.startMusicButton = new System.Windows.Forms.Button();
+            this.openMusicButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.displayBox = new System.Windows.Forms.GroupBox();
             this.displayPanel = new System.Windows.Forms.Panel();
             this.stopDisplayButton = new System.Windows.Forms.Button();
             this.startDisplayButton = new System.Windows.Forms.Button();
+            this.triangleBox = new System.Windows.Forms.GroupBox();
+            this.trianglePanel = new System.Windows.Forms.Panel();
+            this.stopTriangleButton = new System.Windows.Forms.Button();
+            this.startTriangleButton = new System.Windows.Forms.Button();
             this.openMusicDialog = new System.Windows.Forms.OpenFileDialog();
             this.musicBox.SuspendLayout();
             this.displayBox.SuspendLayout();
@@ -64,6 +64,55 @@
             this.musicBox.TabStop = false;
             this.musicBox.Text = "Music Player";
             // 
+            // musicFilePathLabel
+            // 
+            this.musicFilePathLabel.AutoSize = true;
+            this.musicFilePathLabel.Location = new System.Drawing.Point(242, 50);
+            this.musicFilePathLabel.Name = "musicFilePathLabel";
+            this.musicFilePathLabel.Size = new System.Drawing.Size(0, 25);
+            this.musicFilePathLabel.TabIndex = 2;
+            // 
+            // stopMusicButton
+            // 
+            this.stopMusicButton.Enabled = false;
+            this.stopMusicButton.Location = new System.Drawing.Point(425, 98);
+            this.stopMusicButton.Name = "stopMusicButton";
+            this.stopMusicButton.Size = new System.Drawing.Size(174, 49);
+            this.stopMusicButton.TabIndex = 1;
+            this.stopMusicButton.Text = "Stop";
+            this.stopMusicButton.UseVisualStyleBackColor = true;
+            this.stopMusicButton.Click += new System.EventHandler(this.stopMusicButton_Click);
+            // 
+            // startMusicButton
+            // 
+            this.startMusicButton.Enabled = false;
+            this.startMusicButton.Location = new System.Drawing.Point(231, 98);
+            this.startMusicButton.Name = "startMusicButton";
+            this.startMusicButton.Size = new System.Drawing.Size(174, 49);
+            this.startMusicButton.TabIndex = 1;
+            this.startMusicButton.Text = "Play";
+            this.startMusicButton.UseVisualStyleBackColor = true;
+            this.startMusicButton.Click += new System.EventHandler(this.startMusicButton_Click);
+            // 
+            // openMusicButton
+            // 
+            this.openMusicButton.Location = new System.Drawing.Point(38, 98);
+            this.openMusicButton.Name = "openMusicButton";
+            this.openMusicButton.Size = new System.Drawing.Size(174, 49);
+            this.openMusicButton.TabIndex = 1;
+            this.openMusicButton.Text = "Open";
+            this.openMusicButton.UseVisualStyleBackColor = true;
+            this.openMusicButton.Click += new System.EventHandler(this.openMusicButton_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 50);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(192, 25);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Loaded Audio File:";
+            // 
             // displayBox
             // 
             this.displayBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -78,101 +127,6 @@
             this.displayBox.TabIndex = 1;
             this.displayBox.TabStop = false;
             this.displayBox.Text = "Display Thread";
-            // 
-            // triangleBox
-            // 
-            this.triangleBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.triangleBox.Controls.Add(this.trianglePanel);
-            this.triangleBox.Controls.Add(this.stopTriangleButton);
-            this.triangleBox.Controls.Add(this.startTriangleButton);
-            this.triangleBox.Location = new System.Drawing.Point(539, 200);
-            this.triangleBox.Name = "triangleBox";
-            this.triangleBox.Size = new System.Drawing.Size(537, 597);
-            this.triangleBox.TabIndex = 2;
-            this.triangleBox.TabStop = false;
-            this.triangleBox.Text = "Triangle Thread";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(33, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(192, 25);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Loaded Audio File:";
-            // 
-            // openMusicButton
-            // 
-            this.openMusicButton.Location = new System.Drawing.Point(38, 98);
-            this.openMusicButton.Name = "openMusicButton";
-            this.openMusicButton.Size = new System.Drawing.Size(174, 49);
-            this.openMusicButton.TabIndex = 1;
-            this.openMusicButton.Text = "Open";
-            this.openMusicButton.UseVisualStyleBackColor = true;
-            this.openMusicButton.Click += new System.EventHandler(this.openMusicButton_Click);
-            // 
-            // startMusicButton
-            // 
-            this.startMusicButton.Location = new System.Drawing.Point(231, 98);
-            this.startMusicButton.Name = "startMusicButton";
-            this.startMusicButton.Size = new System.Drawing.Size(174, 49);
-            this.startMusicButton.TabIndex = 1;
-            this.startMusicButton.Text = "Play";
-            this.startMusicButton.UseVisualStyleBackColor = true;
-            this.startMusicButton.Click += new System.EventHandler(this.startMusicButton_Click);
-            // 
-            // stopMusicButton
-            // 
-            this.stopMusicButton.Location = new System.Drawing.Point(425, 98);
-            this.stopMusicButton.Name = "stopMusicButton";
-            this.stopMusicButton.Size = new System.Drawing.Size(174, 49);
-            this.stopMusicButton.TabIndex = 1;
-            this.stopMusicButton.Text = "Stop";
-            this.stopMusicButton.UseVisualStyleBackColor = true;
-            this.stopMusicButton.Click += new System.EventHandler(this.stopMusicButton_Click);
-            // 
-            // musicFilePathLabel
-            // 
-            this.musicFilePathLabel.AutoSize = true;
-            this.musicFilePathLabel.Location = new System.Drawing.Point(242, 50);
-            this.musicFilePathLabel.Name = "musicFilePathLabel";
-            this.musicFilePathLabel.Size = new System.Drawing.Size(0, 25);
-            this.musicFilePathLabel.TabIndex = 2;
-            // 
-            // trianglePanel
-            // 
-            this.trianglePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.trianglePanel.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.trianglePanel.Location = new System.Drawing.Point(22, 40);
-            this.trianglePanel.Name = "trianglePanel";
-            this.trianglePanel.Size = new System.Drawing.Size(496, 462);
-            this.trianglePanel.TabIndex = 0;
-            this.trianglePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.trianglePanel_Paint);
-            // 
-            // startTriangleButton
-            // 
-            this.startTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.startTriangleButton.Location = new System.Drawing.Point(22, 522);
-            this.startTriangleButton.Name = "startTriangleButton";
-            this.startTriangleButton.Size = new System.Drawing.Size(304, 49);
-            this.startTriangleButton.TabIndex = 1;
-            this.startTriangleButton.Text = "Start Rotate";
-            this.startTriangleButton.UseVisualStyleBackColor = true;
-            this.startTriangleButton.Click += new System.EventHandler(this.startTriangleButton_Click);
-            // 
-            // stopTriangleButton
-            // 
-            this.stopTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.stopTriangleButton.Location = new System.Drawing.Point(344, 522);
-            this.stopTriangleButton.Name = "stopTriangleButton";
-            this.stopTriangleButton.Size = new System.Drawing.Size(174, 49);
-            this.stopTriangleButton.TabIndex = 1;
-            this.stopTriangleButton.Text = "Stop";
-            this.stopTriangleButton.UseVisualStyleBackColor = true;
-            this.stopTriangleButton.Click += new System.EventHandler(this.stopTriangleButton_Click);
             // 
             // displayPanel
             // 
@@ -189,6 +143,7 @@
             // stopDisplayButton
             // 
             this.stopDisplayButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.stopDisplayButton.Enabled = false;
             this.stopDisplayButton.Location = new System.Drawing.Point(315, 514);
             this.stopDisplayButton.Name = "stopDisplayButton";
             this.stopDisplayButton.Size = new System.Drawing.Size(174, 49);
@@ -208,6 +163,55 @@
             this.startDisplayButton.Text = "Start Display";
             this.startDisplayButton.UseVisualStyleBackColor = true;
             this.startDisplayButton.Click += new System.EventHandler(this.startDisplayButton_Click);
+            // 
+            // triangleBox
+            // 
+            this.triangleBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.triangleBox.Controls.Add(this.trianglePanel);
+            this.triangleBox.Controls.Add(this.stopTriangleButton);
+            this.triangleBox.Controls.Add(this.startTriangleButton);
+            this.triangleBox.Location = new System.Drawing.Point(539, 200);
+            this.triangleBox.Name = "triangleBox";
+            this.triangleBox.Size = new System.Drawing.Size(537, 597);
+            this.triangleBox.TabIndex = 2;
+            this.triangleBox.TabStop = false;
+            this.triangleBox.Text = "Triangle Thread";
+            // 
+            // trianglePanel
+            // 
+            this.trianglePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trianglePanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.trianglePanel.Location = new System.Drawing.Point(22, 40);
+            this.trianglePanel.Name = "trianglePanel";
+            this.trianglePanel.Size = new System.Drawing.Size(496, 462);
+            this.trianglePanel.TabIndex = 0;
+            this.trianglePanel.Paint += new System.Windows.Forms.PaintEventHandler(this.trianglePanel_Paint);
+            // 
+            // stopTriangleButton
+            // 
+            this.stopTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.stopTriangleButton.Enabled = false;
+            this.stopTriangleButton.Location = new System.Drawing.Point(344, 522);
+            this.stopTriangleButton.Name = "stopTriangleButton";
+            this.stopTriangleButton.Size = new System.Drawing.Size(174, 49);
+            this.stopTriangleButton.TabIndex = 1;
+            this.stopTriangleButton.Text = "Stop";
+            this.stopTriangleButton.UseVisualStyleBackColor = true;
+            this.stopTriangleButton.Click += new System.EventHandler(this.stopTriangleButton_Click);
+            // 
+            // startTriangleButton
+            // 
+            this.startTriangleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.startTriangleButton.Location = new System.Drawing.Point(22, 522);
+            this.startTriangleButton.Name = "startTriangleButton";
+            this.startTriangleButton.Size = new System.Drawing.Size(304, 49);
+            this.startTriangleButton.TabIndex = 1;
+            this.startTriangleButton.Text = "Start Rotate";
+            this.startTriangleButton.UseVisualStyleBackColor = true;
+            this.startTriangleButton.Click += new System.EventHandler(this.startTriangleButton_Click);
             // 
             // openMusicDialog
             // 

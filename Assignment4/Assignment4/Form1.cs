@@ -50,10 +50,7 @@ namespace Assignment4
         private void ClearDestinationButton_Click(object sender, EventArgs e)
         {
             DestinationTextBox.Text = string.Empty;
-            SourceTextBox.SelectAll();
-            SourceTextBox.SelectionBackColor = Color.White;
-            SourceTextBox.SelectionColor = Color.Black;
-            SourceTextBox.DeselectAll();
+            HighlightText(SourceTextBox, FindTextBox.Text);
         }
 
         private void FindTextBox_TextChanged(object sender, EventArgs e)
@@ -109,6 +106,11 @@ namespace Assignment4
                 SourceTextBox.Text = File.ReadAllText(openFileDialog.FileName);
                 HighlightText(SourceTextBox, FindTextBox.Text);
             }
+        }
+
+        private void SourceTextBox_TextChanged(object sender, EventArgs e)
+        {
+           // HighlightText(SourceTextBox, FindTextBox.Text);
         }
     }
 }

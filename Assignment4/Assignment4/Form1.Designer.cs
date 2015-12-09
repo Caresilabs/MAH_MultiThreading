@@ -87,6 +87,7 @@
             this.SourceTextBox.TabIndex = 0;
             this.SourceTextBox.Text = "";
             this.SourceTextBox.WordWrap = false;
+            this.SourceTextBox.TextChanged += new System.EventHandler(this.SourceTextBox_TextChanged);
             // 
             // DestinationTab
             // 
