@@ -1,37 +1,52 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assignment4
 {
+    /// <summary>
+    /// Form1 that demostrates Reader,Modifier and writer sync.
+    /// </summary>
     public partial class Form1 : Form
     {
+        /// <summary>
+        /// Our Buffer.
+        /// </summary>
         public BoundedBuffer Buffer { get; private set; }
 
+        /// <summary>
+        /// Our modifier.
+        /// </summary>
         public Modifier Modifier { get; private set; }
 
+        /// <summary>
+        /// Our writer.
+        /// </summary>
         public Writer Writer { get; private set; }
 
+        /// <summary>
+        /// Our reader.
+        /// </summary>
         public Reader Reader { get; private set; }
 
+        /// <summary>
+        /// Init components
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Run all threads! Our main purpose.
+        /// </summary>
         private void CopyToDestButton_Click(object sender, EventArgs e)
         {
             this.Buffer = new BoundedBuffer(10, SourceTextBox, NotifyCheckBox.Checked, FindTextBox.Text, ReplaceTextBox.Text);
             this.Modifier = new Modifier(Buffer, SourceTextBox.Lines.Length);
-            this.Reader = new Reader(OnReadDone, Buffer, DestinationTextBox, NumOfReplacements ,SourceTextBox.Lines.Length);
+            this.Reader = new Reader(OnReadDone, Buffer, SourceTextBox.Lines.Length);
             this.Writer = new Writer(Buffer, SourceTextBox.Lines.ToList());
 
             Writer.Start();
@@ -40,6 +55,9 @@ namespace Assignment4
 
         }
 
+        /// <summary>
+        /// Callback function that gets called when reader is done.
+        /// </summary>
         private void OnReadDone()
         {
             DestinationTab.BeginInvoke(new MethodInvoker(() => { tabControl1.SelectedIndex = 1; }));
@@ -47,17 +65,29 @@ namespace Assignment4
             NumOfReplacements.BeginInvoke(new MethodInvoker(() => { NumOfReplacements.Text = Buffer.NumOfReplacements.ToString(); }));
         }
 
+        /// <summary>
+        /// Clear destination text.
+        /// </summary>
         private void ClearDestinationButton_Click(object sender, EventArgs e)
         {
             DestinationTextBox.Text = string.Empty;
             HighlightText(SourceTextBox, FindTextBox.Text);
         }
 
+        /// <summary>
+        /// Highlight when find text has changed.
+        /// </summary>
         private void FindTextBox_TextChanged(object sender, EventArgs e)
         {
             HighlightText(SourceTextBox, FindTextBox.Text);
         }
 
+
+        /// <summary>
+        /// Highlight all words that matches.
+        /// </summary>
+        /// <param name="myRtb">Source text box</param>
+        /// <param name="word">Word to match.</param>
         public void HighlightText(RichTextBox myRtb, string word)
         {
             myRtb.SelectAll();
@@ -87,6 +117,9 @@ namespace Assignment4
             myRtb.SelectionBackColor = Color.White;
         }
 
+        /// <summary>
+        /// When form is closing. Join threads.
+        /// </summary>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (Reader != null)
@@ -99,6 +132,9 @@ namespace Assignment4
                 Modifier.StopAndJoin();
         }
 
+        /// <summary>
+        /// Open menu
+        /// </summary>
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -106,11 +142,6 @@ namespace Assignment4
                 SourceTextBox.Text = File.ReadAllText(openFileDialog.FileName);
                 HighlightText(SourceTextBox, FindTextBox.Text);
             }
-        }
-
-        private void SourceTextBox_TextChanged(object sender, EventArgs e)
-        {
-           // HighlightText(SourceTextBox, FindTextBox.Text);
         }
     }
 }

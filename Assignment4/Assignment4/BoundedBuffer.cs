@@ -4,32 +4,55 @@ using System.Windows.Forms;
 
 namespace Assignment4
 {
+    /// <summary>
+    /// A circlular buffer to store strings in.
+    /// </summary>
     public class BoundedBuffer
     {
+        /// <summary>
+        /// A state in the buffer.
+        /// </summary>
         public enum BufferStatus
         {
             Empty, Checked, New
         }
 
+        /// <summary>
+        /// Number of replacements that were done.
+        /// </summary>
         public int NumOfReplacements { get; private set; }
 
+        // Buffer status and the actual string buffer.
         private string[] stringBuffer;
         private BufferStatus[] status;
+
+        // ME lock.
         private object bufferLock;
 
+        // Max items
         private int max;
+
+        // Buffer Positions
         private int writePosition;
         private int readPosition;
         private int findPosition;
+
+        // LInes that were modified.
         private int linesModified;
 
+        // Should we ask for every match?
         private bool notify;
 
+        // The replace and find strings.
         private string findString;
         private string replaceString;
 
+        // txtbox for highlighting
         private RichTextBox txtBox;
 
+        /// <summary>
+        /// Creates a bounded buffer that holds @elements amount of strings.
+        /// </summary>
         public BoundedBuffer(int elements, RichTextBox txtBox, bool notify, string find, string replace)
         {
             this.max = elements;
@@ -43,6 +66,10 @@ namespace Assignment4
             this.bufferLock = new object();
         }
 
+        /// <summary>
+        /// Call to modify.
+        /// </summary>
+        /// <returns>If success.</returns>
         public bool Modify()
         {
             if (status[findPosition] != BufferStatus.New)
@@ -55,22 +82,10 @@ namespace Assignment4
             {
                 int index = 0;
                 string currentLine = stringBuffer[findPosition];
+
+                // Replace until there is no matches.
                 while ((index = replaced.IndexOf(findString, Math.Min(index, currentLine.Length))) != -1)
                 {
-                   // int startIndex = 0;
-                    //txtBox.BeginInvoke(new MethodInvoker(() =>
-                    //{
-                    //    startIndex = txtBox.GetFirstCharIndexFromLine(linesModified) + index;
-                    //}), null);
-
-
-                    //txtBox.BeginInvoke(new MethodInvoker(() =>
-                    //{
-                    //    txtBox.Select(startIndex, findString.Length);
-                    //    txtBox.SelectionColor = Color.White;
-                    //    txtBox.SelectionBackColor = Color.Blue;
-                    //}), null);
-
                     bool shouldReplace = (notify ? (MessageBox.Show("Replace " + findString + " with " + replaceString + "?", "Replace", MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                         MessageBoxDefaultButton.Button1) == DialogResult.Yes) : true);
 
@@ -80,17 +95,11 @@ namespace Assignment4
                         NumOfReplacements++;
                     }
 
-                    //txtBox.BeginInvoke(new MethodInvoker(() =>
-                    //{
-                    //    txtBox.Select(startIndex, findString.Length);
-                    //    txtBox.SelectionColor = Color.Black;
-                    //    txtBox.SelectionBackColor = Color.Green;
-                    //}), null);
-
-                    index += replaceString.Length ;
+                    index += replaceString.Length;
                 }
             }
 
+            // Go into CR
             lock (bufferLock)
             {
                 linesModified++;
@@ -102,6 +111,11 @@ namespace Assignment4
             return true;
         }
 
+        /// <summary>
+        /// Read data from the buffer.
+        /// </summary>
+        /// <param name="data">The read data.</param>
+        /// <returns>If success.</returns>
         public bool ReadData(out string data)
         {
             if (status[readPosition] != BufferStatus.Checked)
@@ -120,6 +134,11 @@ namespace Assignment4
             return true;
         }
 
+        /// <summary>
+        /// Write data to the buffer.
+        /// </summary>
+        /// <param name="data">The write data</param>
+        /// <returns>If success.</returns>
         public bool WriteData(string data)
         {
             if (status[writePosition] != BufferStatus.Empty)
@@ -135,6 +154,12 @@ namespace Assignment4
             return true;
         }
 
+        /// <summary>
+        /// Replace at position the replace word.
+        /// </summary>
+        /// <param name="source">The source text.</param>
+        /// <param name="pos">The position to replace</param>
+        /// <returns></returns>
         private string ReplaceAt(string source, int pos)
         {
             return source.Substring(0, pos) + replaceString + source.Substring(pos + findString.Length, source.Length - (pos + findString.Length));

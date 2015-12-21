@@ -2,12 +2,26 @@
 
 namespace Assignment4
 {
+    /// <summary>
+    /// Simple writer class for writing multiple lines into a specific buffer.
+    /// </summary>
     public class Writer : RunnableLoop
     {
+        /// <summary>
+        /// The text to write.
+        /// </summary>
         public List<string> TextToWrite { get; private set; }
 
+        /// <summary>
+        /// Our buffer.
+        /// </summary>
         public BoundedBuffer Buffer { get; private set; }
 
+        /// <summary>
+        /// Creates a writer
+        /// </summary>
+        /// <param name="buffer">The buffer to write to</param>
+        /// <param name="textToWrite">The text to write.</param>
         public Writer(BoundedBuffer buffer, List<string> textToWrite)
         {
             this.TextToWrite = textToWrite;
@@ -15,6 +29,9 @@ namespace Assignment4
             base.LoopMethod = WriteLoop;
         }
 
+        /// <summary>
+        /// The work loop.
+        /// </summary>
         public void WriteLoop()
         {
             while (TextToWrite.Count > 0 && IsRunning)
