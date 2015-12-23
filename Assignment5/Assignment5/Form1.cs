@@ -17,15 +17,24 @@ namespace Assignment5
         /// </summary>
         private Carpark carpark;
 
+        /// <summary>
+        /// Tasks array
+        /// </summary>
+        private Task[] tasks;
+
         public Form1()
         {
             InitializeComponent();
+            tasks = new Task[5];
         }
 
         private void startstopbutton_Click(object sender, EventArgs e)
         {
             if (startstopbutton.Text == "Start")
             {
+                if (tasks[0] != null)
+                    return;
+
                 startstopbutton.Text = "Stop";
                 Start();
             }
@@ -49,11 +58,11 @@ namespace Assignment5
 
             carpark = new Carpark(ref queues, carParkProgress, 500);
 
-            Task.Factory.StartNew(carpark.Run);
-            Task.Factory.StartNew(queues[0].Run);
-            Task.Factory.StartNew(queues[1].Run);
-            Task.Factory.StartNew(queues[2].Run);
-            Task.Factory.StartNew(queues[3].Run);
+            tasks[0] = Task.Factory.StartNew(carpark.Run);
+            tasks[1] = Task.Factory.StartNew(queues[0].Run);
+            tasks[2] = Task.Factory.StartNew(queues[1].Run);
+            tasks[3] = Task.Factory.StartNew(queues[2].Run);
+            tasks[4] = Task.Factory.StartNew(queues[3].Run);
         }
 
         // Stop the simulation
@@ -64,6 +73,16 @@ namespace Assignment5
             queues[1].Operational = false;
             queues[2].Operational = false;
             queues[3].Operational = false;
+
+            for (int i = 0; i < tasks.Length; i++)
+            {
+                tasks[i].Wait();
+            }
+
+            for (int i = 0; i < tasks.Length; i++)
+            {
+                tasks[i] = null;
+            }
         }
     }
 }

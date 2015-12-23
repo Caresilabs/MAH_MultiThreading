@@ -75,7 +75,7 @@ namespace Assignment5
                         progressBar.Invoke(new MethodInvoker(() => { progressBar.Value = (int)(100 * ((float)Count / 50)); }));
                     }
                 }
-                Thread.Sleep(Random.Next(100, 400));
+                Thread.Sleep(Random.Next(200, 400));
             }
         }
 
