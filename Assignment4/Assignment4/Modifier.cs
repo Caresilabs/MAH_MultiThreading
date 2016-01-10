@@ -36,7 +36,7 @@ namespace Assignment4
         {
             for (int i = 0; i < Count && IsRunning; i++)
             {
-                while (!Buffer.Modify()) ;
+                Buffer.Modify();
             }
         }
     }

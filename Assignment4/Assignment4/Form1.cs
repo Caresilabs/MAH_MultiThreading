@@ -63,6 +63,7 @@ namespace Assignment4
             DestinationTab.BeginInvoke(new MethodInvoker(() => { tabControl1.SelectedIndex = 1; }));
             DestinationTextBox.BeginInvoke(new MethodInvoker(() => { DestinationTextBox.Lines = Reader.StringList.ToArray(); }));
             NumOfReplacements.BeginInvoke(new MethodInvoker(() => { NumOfReplacements.Text = Buffer.NumOfReplacements.ToString(); }));
+            DestinationTextBox.BeginInvoke(new MethodInvoker(() => { HighlightText(DestinationTextBox, ReplaceTextBox.Text); }));
         }
 
         /// <summary>
@@ -70,6 +71,7 @@ namespace Assignment4
         /// </summary>
         private void ClearDestinationButton_Click(object sender, EventArgs e)
         {
+            HighlightText(DestinationTextBox, String.Empty);
             DestinationTextBox.Text = string.Empty;
             HighlightText(SourceTextBox, FindTextBox.Text);
         }

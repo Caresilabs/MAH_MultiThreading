@@ -37,10 +37,8 @@ namespace Assignment4
             while (TextToWrite.Count > 0 && IsRunning)
             {
                 string data = TextToWrite[0];
-                if (Buffer.WriteData(data))
-                {
-                    TextToWrite.RemoveAt(0);
-                }
+                Buffer.WriteData(data);
+                TextToWrite.RemoveAt(0);
             }
         }
     }

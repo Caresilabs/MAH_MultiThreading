@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Assignment4
@@ -69,14 +70,8 @@ namespace Assignment4
         /// <summary>
         /// Call to modify.
         /// </summary>
-        /// <returns>If success.</returns>
-        public bool Modify()
+        public void Modify()
         {
-            if (status[findPosition] != BufferStatus.New)
-            {
-                return false;
-            }
-
             string replaced = stringBuffer[findPosition];
             if (!string.IsNullOrEmpty(findString))
             {
@@ -102,56 +97,63 @@ namespace Assignment4
             // Go into CR
             lock (bufferLock)
             {
+               while (status[findPosition] != BufferStatus.New)
+                {
+                    Monitor.Wait(bufferLock);
+                }
+
                 linesModified++;
                 stringBuffer[findPosition] = replaced;
                 status[findPosition] = BufferStatus.Checked;
+
+                Monitor.PulseAll(bufferLock);
             }
 
             findPosition = (findPosition + 1) % max;
-            return true;
         }
 
         /// <summary>
         /// Read data from the buffer.
         /// </summary>
         /// <param name="data">The read data.</param>
-        /// <returns>If success.</returns>
-        public bool ReadData(out string data)
+        public void ReadData(out string data)
         {
-            if (status[readPosition] != BufferStatus.Checked)
-            {
-                data = default(string);
-                return false;
-            }
-
             lock (bufferLock)
             {
+                while (status[readPosition] != BufferStatus.Checked)
+                {
+                    Monitor.Wait(bufferLock);
+                }
+
                 data = stringBuffer[readPosition];
                 status[readPosition] = BufferStatus.Empty;
+
+                Monitor.PulseAll(bufferLock);
             }
 
             readPosition = (readPosition + 1) % max;
-            return true;
         }
 
         /// <summary>
         /// Write data to the buffer.
         /// </summary>
         /// <param name="data">The write data</param>
-        /// <returns>If success.</returns>
-        public bool WriteData(string data)
+        public void WriteData(string data)
         {
-            if (status[writePosition] != BufferStatus.Empty)
-                return false;
-
             lock (bufferLock)
             {
+                while (status[writePosition] != BufferStatus.Empty)
+                {
+                    Monitor.Wait(bufferLock);
+                }
+
                 stringBuffer[writePosition] = data;
                 status[writePosition] = BufferStatus.New;
+
+                Monitor.PulseAll(bufferLock);
             }
 
             writePosition = (writePosition + 1) % max;
-            return true;
         }
 
         /// <summary>

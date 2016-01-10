@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 
 namespace Assignment4
 {
@@ -43,8 +42,7 @@ namespace Assignment4
             for (int i = 0; i < Count && IsRunning; i++)
             {
                 string data;
-                while (!Buffer.ReadData(out data)) ;
-
+                Buffer.ReadData(out data);
                 StringList.Add(data);
             }
 
